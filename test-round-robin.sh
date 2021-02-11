@@ -19,8 +19,8 @@ fi
 
 for ((request=1;request<=${TOTAL_REQUEST_COUNT};request++))
 do
-  CURRENT_NODE=$(${CURL_BIN} -s -X GET "http://localhost:8080/" | ${JQ_BIN} .node)
-  if [ ${CURRENT_NODE} != ${CURRENT_NODE} ]; then
+  CURRENT_NODE=$(${CURL_BIN} -s -X GET "http://localhost:8080/" | ${JQ_BIN} -r .node)
+  if [ "${CURRENT_NODE}" == "${PREVIOUS_NODE}" ]; then
     echo "Same node hits by successive call!"
     exit 1
   fi
